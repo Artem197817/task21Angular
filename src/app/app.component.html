@@ -93,7 +93,8 @@
     <div class="container">
       <h2 class="select-title" >Выберите свой макарун</h2>
       <div class="select-info">
-        <product *ngFor="let product of products;" [product]="product"></product>
+        <product *ngFor="let product of products;" [product]="product"
+        (addToCartEvent)="addToCart($event, order)"></product>
 
 <!--        <div class="select-info-item  wow animate__slideInUp" *ngFor="let product of products; let i = index;">-->
 <!--          <div class="select-info-item-image wow animate__slideInDown">-->

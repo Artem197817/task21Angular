@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {ProductType} from '../../types/product.type';
+
 
 @Component({
   selector: 'product',
@@ -11,12 +12,17 @@ import {ProductType} from '../../types/product.type';
 export class ProductComponent {
   i:number = 0;
 
-@Input product: ProductType;
+@Input() product!: ProductType;
+
+@Output() addToCartEvent = new EventEmitter<ProductType>();
 
 constructor() {
-  this.i++;
+
 }
 
+addToCartProduct(){
+  this.addToCartEvent.emit(this.product);
+}
 
 
 }

@@ -1,4 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+.flex-align-center() {
+  display: flex;
+  align-items: center;
+}
+
+@dark-maroon-color: rgb(51, 25, 7);
+@white: rgb(255, 255, 255);
+@maroon: rgb(119, 10, 29);
+@pink: rgb(235, 168, 177);
+@maroon-light: #821328;
+@pink-rights: #dfa5ad;
+@pink-footer: #c0707c;
+@background-white: rgb(255, 239, 239);
+@order-input-placeholder-color: rgb(118, 12, 34);
+@order-black: rgb(18, 10, 6);
+@gradient1: rgb(113, 8, 30);
+@gradient2: rgb(215, 72, 92);
+@button-shadow: rgba(130, 19, 40, 0.5);
+@advantage-icon-color: #eba8be;
+@menu-item-color: #770b1d;
+
+
 body {
   font-family: Gilroy, sans-serif;
   font-weight: 400;
@@ -6,5 +28,27 @@ body {
   margin: 0;
 }
 
+.button {
+  color: @white;
+  font-weight: 700;
+  cursor: pointer;
+  .flex-align-center();
+  justify-content: center;
+  background-image: -moz-linear-gradient(90deg, @gradient1 0%, @gradient2 100%);
+  background-image: -webkit-linear-gradient(90deg, @gradient1 0%, @gradient2 100%);
+  background-image: -ms-linear-gradient(90deg, @gradient1 0%, @gradient2 100%);
+  box-sizing: border-box;
+  border-radius: 30px;
 
+  &:hover {
+    box-shadow: 0 5px 9px 1px @button-shadow;
+  }
+
+  a {
+    text-decoration: none;
+    color: @white;
+    font-weight: 700;
+  }
+
+}
 
