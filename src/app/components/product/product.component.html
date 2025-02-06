@@ -1,0 +1,17 @@
+<div class="select-info-item  wow animate__slideInUp" >
+  <div class="select-info-item-image wow animate__slideInDown">
+    <img [src]="'assets/images/'+ product.image" alt="Макарун{{i}}" class="select-info-item-img">
+  </div>
+  <div class="select-info-item-title">{{ product.productTitle }}</div>
+  <div class="select-info-item-container">
+    <div class="select-info-item-text">
+      <div class="select-info-item-result">{{ product.quantity }}</div>
+      <div class="select-info-item-price">{{ product.price }}</div>
+    </div>
+    <div class="button select-info-item-button">
+      <a href="#" class="select-info-item-link" (click)=" $event.preventDefault()">Заказать</a>
+    </div>
+  </div>
+</div>
+
+<!--addToCart(product, order);-->

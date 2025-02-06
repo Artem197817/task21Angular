@@ -1,0 +1,202 @@
+<div class="app-body" id="app-body">
+  <header class="header">
+    <div class="container">
+
+      <div class="logo">
+        <a href="#" class="logo-link">
+          <img src="assets/images/logo.png" alt="logo" class="logo-img">
+        </a>
+      </div>
+      <nav class="menu" id="menu" #menu>
+        <div class="close" id="close" (click)="closeMenu(menu)">
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+               xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+               viewBox="0 0 492 492" style="enable-background:new 0 0 492 492;" xml:space="preserve">
+                    <g>
+                        <g>
+		<path d="M300.188,246L484.14,62.04c5.06-5.064,7.852-11.82,7.86-19.024c0-7.208-2.792-13.972-7.86-19.028L468.02,7.872
+			c-5.068-5.076-11.824-7.856-19.036-7.856c-7.2,0-13.956,2.78-19.024,7.856L246.008,191.82L62.048,7.872
+			c-5.06-5.076-11.82-7.856-19.028-7.856c-7.2,0-13.96,2.78-19.02,7.856L7.872,23.988c-10.496,10.496-10.496,27.568,0,38.052
+			L191.828,246L7.872,429.952c-5.064,5.072-7.852,11.828-7.852,19.032c0,7.204,2.788,13.96,7.852,19.028l16.124,16.116
+			c5.06,5.072,11.824,7.856,19.02,7.856c7.208,0,13.968-2.784,19.028-7.856l183.96-183.952l183.952,183.952
+			c5.068,5.072,11.824,7.856,19.024,7.856h0.008c7.204,0,13.96-2.784,19.028-7.856l16.12-16.116
+			c5.06-5.064,7.852-11.824,7.852-19.028c0-7.204-2.792-13.96-7.852-19.028L300.188,246z"/>
+	                    </g>
+                    </g>
+                </svg>
+        </div>
+        <ul>
+          <li class="menu-item item1 wow animate__fadeInDown">
+            <a href="#" class="menu-item-link" (click)="scrollInTo(selectElement); $event.preventDefault()">Пироженки</a></li>
+          <li class="menu-item item wow animate__fadeInDown"><a href="#" class="menu-item-link " (click)="scrollInTo(about); $event.preventDefault()">О нас</a></li>
+          <li class="menu-item item wow animate__fadeInDown"><a href="#" class="menu-item-link " (click)="scrollInTo(order); $event.preventDefault()">Оформить заказ</a></li>
+        </ul>
+      </nav>
+      <div class="burger" id="burger">
+        <img src="assets/images/burger.png" alt="burger" (click)="burgerBehavior(menu)">
+      </div>
+      <div class="phone" id="phone">{{phoneNumber}}</div>
+    </div>
+  </header>
+  <section class="title">
+    <div class="container">
+      <button class="button theme-button" type="button" (click)="darkThemeActivation()">Изменить тему</button>
+      <div class="title-info wow animate__backInLeft">
+        <h1 class="title-info-title">Мягкие французские
+          пироженки Macaroons</h1>
+        <div class="title-info-text">Побалуйте себя и своих близких самыми вкусными и ароматными домашними
+          пироженками Macaroon!
+        </div>
+        <div class="button title-info-button" >
+          <a href="#" class="button-link" (click)="scrollInTo(selectElement); $event.preventDefault()" >Выбрать макарун</a>
+        </div>
+      </div>
+      <div class="title-image wow animate__backInRight">
+        <img src="assets/images/macaroons-box.png" alt="макаруны" class="title-info-image-img">
+        <div class="title-image-circle-container">
+          <div class="title-image-circle circle1"></div>
+          <div class="title-image-circle circle2"></div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="advantages" #about>
+    <div class="container">
+
+      <div class="advantages-title">
+        <h2>Мы печём для вас
+          вкуснейшие макаруны
+          уже более 10 лет</h2>
+        <div class="advantages-title-text">Все пироженки мы готовим только из натуральных и качественных продуктов,
+          без консервантов, ароматизаторов, красителей.
+          Используем в приготовлении сливочное масло 82,5%, без дрожжей, маргарина, разрыхлителей и улучшителей
+          муки.
+        </div>
+      </div>
+      <div class="advantages-image wow animate__rollIn">
+        <img src="assets/images/macaroon-big.png" alt="макарун" class="advantages-image-img">
+      </div>
+      <div class="advantages-info">
+        <div class="advantage" *ngFor="let advantage of advantages; let i = index;">
+          <div class="advantage-image">
+            <div class="advantage-icon wow animate__zoomIn">{{i+1}}</div>
+          </div>
+          <h3 class="advantage-title">{{advantage.advantageTitle}}</h3>
+          <div class="advantage-text">{{advantage.advantageDescription}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="select" #selectElement>
+    <div class="container">
+      <h2 class="select-title" >Выберите свой макарун</h2>
+      <div class="select-info">
+        <product *ngFor="let product of products;" [product]="product"></product>
+
+<!--        <div class="select-info-item  wow animate__slideInUp" *ngFor="let product of products; let i = index;">-->
+<!--          <div class="select-info-item-image wow animate__slideInDown">-->
+<!--            <img [src]="'assets/images/'+ product.image" alt="Макарун{{i+1}}" class="select-info-item-img">-->
+<!--          </div>-->
+<!--          <div class="select-info-item-title">{{ product.productTitle }}</div>-->
+<!--          <div class="select-info-item-container">-->
+<!--            <div class="select-info-item-text">-->
+<!--              <div class="select-info-item-result">{{ product.quantity }}</div>-->
+<!--              <div class="select-info-item-price">{{ product.price }}</div>-->
+<!--            </div>-->
+<!--            <div class="button select-info-item-button">-->
+<!--              <a href="#" class="select-info-item-link" (click)="addToCart(product, order); $event.preventDefault()">Заказать</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+      </div>
+    </div>
+  </section>
+  <div class="overflow">
+    <section class="order" #order>
+      <div class="container">
+        <div class="order-image-motion big-berry" id="big-berry">
+          <img src="assets/images/berry-big.png" alt="клубника" class="order-image-motion-img">
+        </div>
+        <div class="order-image wow animate__fadeInBottomLeft">
+          <img src="assets/images/macaroons.png" alt="макаруны" class="order-image-main">
+
+        </div>
+        <div class="order-info wow animate__fadeInBottomRight">
+          <h2 class="order-info-title">Закажите макарун!</h2>
+          <div class="order-info-text">Выберите понравившийся макарун, заполните форму и ожидайте звонка нашего
+            пекаря!
+          </div>
+          <div class="order-info-form-container">
+            <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" class="order-info-form needs-validation" novalidate *ngIf="showOrderForm">
+              <h3 class="order-info-small-title">Ваш выбор</h3>
+
+              <input type="text" formControlName="product" class="order-info-input form-control"
+                     placeholder="Напишите, что хотите заказать..." id="inputProduct" required>
+              <div *ngIf="orderForm.get('product')?.invalid && orderForm.get('product')?.touched" class="invalid-feedback">
+                Пожалуйста, укажите продукт.
+              </div>
+
+              <h3 class="order-info-small-title small-title2">Заполните данные для заказа</h3>
+
+              <input type="text" formControlName="name" class="order-info-input form-control"
+                     placeholder="Ваше имя" id="inputName" required>
+              <div *ngIf="orderForm.get('name')?.invalid && orderForm.get('name')?.touched" class="invalid-feedback">
+                Пожалуйста, введите имя.
+              </div>
+
+              <input type="text" formControlName="phone" class="order-info-input form-control"
+                     placeholder="+375 (__) ___ - __ - __" id="inputPhone" required>
+              <div *ngIf="orderForm.get('phone')?.invalid && orderForm.get('phone')?.touched" class="invalid-feedback">
+                Пожалуйста, введите телефон.
+              </div>
+
+              <button type="submit" class="button order-info-button" [disabled]="orderForm.invalid">Оформить заказ</button>
+            </form>
+
+            <div class="order-success-info" *ngIf="!showOrderForm">
+              {{ successMessage }}
+            </div>
+          </div>
+          <div class="order-image-motion small-berry">
+            <img src="assets/images/berry-small.png" alt="клубника" class="order-image-motion-img">
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="container">
+        <div class="logo">
+          <img src="assets/images/logo.png" alt="logo" class="logo-img">
+          <div class="rights">Все права защищены, 2020</div>
+        </div>
+        <a [href]="instagramLink" class="footer-instagram">
+          <img src="assets/images/instagram.png" alt="instagram" class="footer-instagram-image">
+          <div class="footer-instagram-text">Мы в Instagram</div>
+        </a>
+        <div class="phone">{{ phoneNumber }}</div>
+      </div>
+    </footer>
+  </div>
+  <div class="present" *ngIf="showPresent">
+    <a href="#" class="present-link">
+      <div class="present-container">
+        <img src="assets/images/present.png" alt="present" class="present-image">
+        <div class="order-present">
+          <img src="assets/images/present-order.png" alt="present-order" class="order-present-img">
+          <span class="order-present-text">
+            Оформите заказ<br> и получите подарок!
+                </span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</div>
+<div class="loader-container" *ngIf="loading">
+  <span class="loader"></span>
+</div>
+
