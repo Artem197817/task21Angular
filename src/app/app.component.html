@@ -35,7 +35,7 @@
       <div class="burger" id="burger">
         <img src="assets/images/burger.png" alt="burger" (click)="burgerBehavior(menu)">
       </div>
-      <div class="phone" id="phone">{{phoneNumber}}</div>
+      <div class="phone" id="phone">{{phoneNumber | phoneNumberFormat}}</div>
     </div>
   </header>
   <section class="title">
@@ -75,17 +75,18 @@
         </div>
       </div>
       <div class="advantages-image wow animate__rollIn">
-        <img src="assets/images/macaroon-big.png" alt="макарун" class="advantages-image-img">
+        <img src="../assets/images/macaroon-big.png" alt="макарун" class="advantages-image-img">
       </div>
       <div class="advantages-info">
-        <div class="advantage" *ngFor="let advantage of advantages; let i = index;">
-          <div class="advantage-image">
-            <div class="advantage-icon wow animate__zoomIn">{{i+1}}</div>
-          </div>
-          <h3 class="advantage-title">{{advantage.advantageTitle}}</h3>
-          <div class="advantage-text">{{advantage.advantageDescription}}
-          </div>
-        </div>
+        <advantages *ngFor="let advantage of advantages; let i = index" [advantage]="advantage" [index]="i"></advantages>
+<!--        <div class="advantage">-->
+<!--          <div class="advantage-image">-->
+<!--            <div class="advantage-icon wow animate__zoomIn">{{i+1}}</div>-->
+<!--          </div>-->
+<!--          <h3 class="advantage-title">{{advantage.advantageTitle}}</h3>-->
+<!--          <div class="advantage-text">{{advantage.advantageDescription}}-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
     </div>
   </section>
@@ -119,10 +120,10 @@
     <section class="order" #order>
       <div class="container">
         <div class="order-image-motion big-berry" id="big-berry">
-          <img src="assets/images/berry-big.png" alt="клубника" class="order-image-motion-img">
+          <img src="../assets/images/berry-big.png" alt="клубника" class="order-image-motion-img">
         </div>
         <div class="order-image wow animate__fadeInBottomLeft">
-          <img src="assets/images/macaroons.png" alt="макаруны" class="order-image-main">
+          <img src="../assets/images/macaroons.png" alt="макаруны" class="order-image-main">
 
         </div>
         <div class="order-info wow animate__fadeInBottomRight">
@@ -162,7 +163,7 @@
             </div>
           </div>
           <div class="order-image-motion small-berry">
-            <img src="assets/images/berry-small.png" alt="клубника" class="order-image-motion-img">
+            <img src="../assets/images/berry-small.png" alt="клубника" class="order-image-motion-img">
           </div>
         </div>
 
@@ -171,23 +172,23 @@
     <footer class="footer">
       <div class="container">
         <div class="logo">
-          <img src="assets/images/logo.png" alt="logo" class="logo-img">
+          <img src="../assets/images/logo.png" alt="logo" class="logo-img">
           <div class="rights">Все права защищены, 2020</div>
         </div>
         <a [href]="instagramLink" class="footer-instagram">
-          <img src="assets/images/instagram.png" alt="instagram" class="footer-instagram-image">
+          <img src="../assets/images/instagram.png" alt="instagram" class="footer-instagram-image">
           <div class="footer-instagram-text">Мы в Instagram</div>
         </a>
-        <div class="phone">{{ phoneNumber }}</div>
+        <div class="phone">{{ phoneNumber | phoneNumberFormat }}</div>
       </div>
     </footer>
   </div>
   <div class="present" *ngIf="showPresent">
     <a href="#" class="present-link">
       <div class="present-container">
-        <img src="assets/images/present.png" alt="present" class="present-image">
+        <img src="../assets/images/present.png" alt="present" class="present-image">
         <div class="order-present">
-          <img src="assets/images/present-order.png" alt="present-order" class="order-present-img">
+          <img src="../assets/images/present-order.png" alt="present-order" class="order-present-img">
           <span class="order-present-text">
             Оформите заказ<br> и получите подарок!
                 </span>

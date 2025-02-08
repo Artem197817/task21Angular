@@ -1,0 +1,58 @@
+.flex-align-center() {
+  display: flex;
+  align-items: center;
+}
+
+@dark-maroon-color: rgb(51, 25, 7);
+@white: rgb(255, 255, 255);
+@maroon-light: #821328;
+@advantage-icon-color: #eba8be;
+
+
+
+
+.advantage {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+
+  .advantage-image {
+    .advantage-icon {
+      font-size: 60px;
+      color: @white;
+      width: 70px;
+      height: 70px;
+      box-sizing: border-box;
+      background-color: @maroon-light;
+      font-weight: 800;
+      border-radius: 50%;
+      padding-top: 18px;
+      text-align: center;
+      margin-bottom: 13px;
+    }
+  }
+
+  &:hover {
+    .advantage-icon {
+      background-color: @advantage-icon-color;
+      color: @maroon-light;
+    }
+  }
+
+  .advantage-title {
+    font-size: 20px;
+    color: @dark-maroon-color;
+    font-weight: 800;
+  }
+
+  .advantage-text {
+    box-sizing: border-box;
+    width: 220px;
+    height: 102px;
+    font-size: 15px;
+    font-weight: 500;
+    color: @dark-maroon-color;
+    line-height: 1.333;
+    margin-top: 20px;
+  }
+}

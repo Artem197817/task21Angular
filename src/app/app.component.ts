@@ -5,12 +5,15 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {AdvantageType} from './types/advantage.type';
 import {ProductComponent} from './components/product/product.component';
+import {ProductService} from './services/product.service';
+import {AdvantagesComponent} from './components/advantages/advantages.component';
+import {AdvantagesService} from './services/advantages.service';
+import {PhoneNumberFormatPipe} from './pipes/phone-number-format.pipe';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-
   templateUrl: './app.component.html',
   imports: [
     NgForOf,
@@ -18,65 +21,25 @@ import {ProductComponent} from './components/product/product.component';
     ReactiveFormsModule,
     NgIf,
     HttpClientModule,
-    ProductComponent
+    ProductComponent,
+    AdvantagesComponent,
+    PhoneNumberFormatPipe
 
   ],
   styleUrl: './app.component.less'
 })
 export class AppComponent {
-  public title = 'task20macaroon';
+  public title = 'task21Angular';
   public isDark: boolean = false;
   public orderForm: FormGroup;
   public successMessage: string | null = null;
   public showPresent: boolean = false;
-  public phoneNumber: string = '+375 (29) 368-98-68';
+  public phoneNumber: string = '+375293689868';
   public instagramLink: string = 'https://www.instagram.com';
   public showOrderForm: boolean = true;
   public loading: boolean = false;
-  public products: ProductType[] = [
-    {
-      image: 'macaroon1.png',
-      productTitle: 'Макарун с малиной',
-      quantity: '1 шт',
-      price: '1.70 руб.',
-    },
-    {
-      image: 'macaroon2.png',
-      productTitle: 'Макарун с манго',
-      quantity: '1 шт',
-      price: '1.70 руб.',
-    },
-    {
-      image: 'macaroon3.png',
-      productTitle: 'Пирог с ванилью',
-      quantity: '1 шт',
-      price: '1.70 руб.',
-    },
-    {
-      image: 'macaroon4.png',
-      productTitle: 'Пирог с фисташками',
-      quantity: '1 шт',
-      price: '1.70 руб.',
-    }
-  ];
-  public advantages: AdvantageType[] = [
-    {
-      advantageTitle: 'Лучшие продукты',
-      advantageDescription: 'Мы честно готовим макаруны только из натуральных и качественных продуктов. Мы не используем консерванты, ароматизаторы и красители.',
-    },
-    {
-      advantageTitle: 'Много вкусов',
-      advantageDescription: 'аша задача – предоставить вам широкое разнобразие вкусов. Вы удивитесь, но у нас более 70 вкусов пироженок.',
-    },
-    {
-      advantageTitle: 'Бисквитное тесто',
-      advantageDescription: 'Все пирожные готовятся на бисквитном тесте с качественным сливочным маслом 82,5%. В составе нет маргарина и дрожжей!',
-    },
-    {
-      advantageTitle: 'Честный продукт',
-      advantageDescription: 'Вкус, качество и безопасность наших пирогов подтверждена декларацией о соответствии, которую мы получили 22.06.2016 г.',
-    },
-  ];
+  public products: ProductType[] = [];
+  public advantages: AdvantageType[] = [];
 
   public FormModel = {
     productTitle: '',
@@ -85,12 +48,20 @@ export class AppComponent {
   }
 
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(private fb: FormBuilder,
+              private http: HttpClient,
+              private productService: ProductService,
+              private advantageService: AdvantagesService) {
     this.orderForm = this.fb.group({
       product: ['', Validators.required],
       name: ['', Validators.required],
       phone: ['', Validators.required]
     });
+  }
+
+  ngOnInit(): void {
+    this.products = this.productService.getProducts();
+    this.advantages = this.advantageService.getAdvantages();
   }
 
   public darkThemeActivation() {

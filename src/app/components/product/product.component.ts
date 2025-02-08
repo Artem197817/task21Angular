@@ -1,10 +1,13 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {ProductType} from '../../types/product.type';
+import {CurrencyPipe} from '../../pipes/currency.pipe';
 
 
 @Component({
   selector: 'product',
-  imports: [],
+  imports: [
+    CurrencyPipe,
+  ],
   templateUrl: './product.component.html',
   standalone: true,
   styleUrl: './product.component.less'
