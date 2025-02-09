@@ -69,9 +69,7 @@ body {
   cursor: pointer;
   .flex-align-center();
   justify-content: center;
-  background-image: -moz-linear-gradient(90deg, @gradient1 0%, @gradient2 100%);
-  background-image: -webkit-linear-gradient(90deg, @gradient1 0%, @gradient2 100%);
-  background-image: -ms-linear-gradient(90deg, @gradient1 0%, @gradient2 100%);
+  background-color: @maroon;
   box-sizing: border-box;
   border-radius: 30px;
 
@@ -85,5 +83,10 @@ body {
     font-weight: 700;
   }
 
+}
+
+.present {
+  position: absolute;
+  z-index: 199;
 }
 

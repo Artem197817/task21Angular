@@ -47,8 +47,8 @@
         <div class="title-info-text">Побалуйте себя и своих близких самыми вкусными и ароматными домашними
           пироженками Macaroon!
         </div>
-        <div class="button title-info-button" >
-          <a href="#" class="button-link" (click)="scrollInTo(selectElement); $event.preventDefault()" >Выбрать макарун</a>
+        <div class="button title-info-button" buttonEffect (click)="scrollInTo(selectElement); $event.preventDefault()"  >
+          <a href="#" class="button-link" >Выбрать макарун</a>
         </div>
       </div>
       <div class="title-image wow animate__backInRight">
@@ -155,7 +155,7 @@
                 Пожалуйста, введите телефон.
               </div>
 
-              <button type="submit" class="button order-info-button" [disabled]="orderForm.invalid">Оформить заказ</button>
+              <button buttonEffect type="submit" class="button order-info-button" [disabled]="orderForm.invalid">Оформить заказ</button>
             </form>
 
             <div class="order-success-info" *ngIf="!showOrderForm">
@@ -184,19 +184,23 @@
     </footer>
   </div>
   <div class="present" *ngIf="showPresent">
-    <a href="#" class="present-link">
-      <div class="present-container">
-        <img src="../assets/images/present.png" alt="present" class="present-image">
-        <div class="order-present">
-          <img src="../assets/images/present-order.png" alt="present-order" class="order-present-img">
-          <span class="order-present-text">
-            Оформите заказ<br> и получите подарок!
-                </span>
-        </div>
-      </div>
-    </a>
+    <cart></cart>
+<!--    <a href="#" class="present-link">-->
+<!--      <div class="present-container">-->
+<!--        <img src="../assets/images/present.png" alt="present" class="present-image">-->
+<!--        <div class="order-present">-->
+<!--          <img src="../assets/images/present-order.png" alt="present-order" class="order-present-img">-->
+<!--          <span class="order-present-text">-->
+<!--            Оформите заказ<br> и получите подарок!-->
+<!--                </span>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </a>-->
 
   </div>
+</div>
+<div class="popup" *ngIf="isPopupOpen" (click)="popupClose()">
+  <span class="popup-info">{{messagePopup}}</span>
 </div>
 <div class="loader-container" *ngIf="loading">
   <span class="loader"></span>

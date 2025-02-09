@@ -9,6 +9,8 @@ import {ProductService} from './services/product.service';
 import {AdvantagesComponent} from './components/advantages/advantages.component';
 import {AdvantagesService} from './services/advantages.service';
 import {PhoneNumberFormatPipe} from './pipes/phone-number-format.pipe';
+import {CartComponent} from './components/cart/cart.component';
+import {ButtonEffectDirective} from './directives/button-effect.directive';
 
 
 @Component({
@@ -23,7 +25,9 @@ import {PhoneNumberFormatPipe} from './pipes/phone-number-format.pipe';
     HttpClientModule,
     ProductComponent,
     AdvantagesComponent,
-    PhoneNumberFormatPipe
+    PhoneNumberFormatPipe,
+    CartComponent,
+    ButtonEffectDirective
 
   ],
   styleUrl: './app.component.less'
@@ -40,6 +44,8 @@ export class AppComponent {
   public loading: boolean = false;
   public products: ProductType[] = [];
   public advantages: AdvantageType[] = [];
+  public messagePopup: string  = '';
+  public isPopupOpen: boolean = false;
 
   public FormModel = {
     productTitle: '',
@@ -87,6 +93,11 @@ export class AppComponent {
       product: product.productTitle.toUpperCase()
     });
     this.showPresent = true;
+    this.isPopupOpen = true;
+    this.messagePopup = product.productTitle + ' добавлен в корзину'
+  }
+  popupClose(){
+    this.isPopupOpen = false;
   }
 
   public burgerBehavior(target: HTMLElement): void {

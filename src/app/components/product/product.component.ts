@@ -1,12 +1,15 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {ProductType} from '../../types/product.type';
 import {CurrencyPipe} from '../../pipes/currency.pipe';
+import {CartService} from '../../services/cart.service';
+import {ButtonEffectDirective} from '../../directives/button-effect.directive';
 
 
 @Component({
   selector: 'product',
   imports: [
     CurrencyPipe,
+    ButtonEffectDirective,
   ],
   templateUrl: './product.component.html',
   standalone: true,
@@ -19,12 +22,13 @@ export class ProductComponent {
 
 @Output() addToCartEvent = new EventEmitter<ProductType>();
 
-constructor() {
+constructor(private cartService: CartService) {
 
 }
 
 addToCartProduct(){
   this.addToCartEvent.emit(this.product);
+  this.cartService.cartAddProduct(this.product);
 }
 
 

@@ -8,8 +8,8 @@
       <div class="select-info-item-result">{{ product.quantity }}</div>
       <div class="select-info-item-price">{{ product.price | currencyPipe }}</div>
     </div>
-    <div class="button select-info-item-button">
-      <a href="#" class="select-info-item-link" (click)="addToCartProduct(); $event.preventDefault()">Заказать</a>
+    <div class="button select-info-item-button" buttonEffect (click)="addToCartProduct(); $event.preventDefault()">
+      <a href="#" class="select-info-item-link">Заказать</a>
     </div>
   </div>
 </div>
