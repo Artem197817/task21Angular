@@ -8,6 +8,7 @@ import {ProductType} from '../types/product.type';
 export class CartService {
   summaView = signal(0);
   count = signal(0);
+
   constructor() {
 
   }

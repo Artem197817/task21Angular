@@ -27,15 +27,20 @@
         </div>
         <ul>
           <li class="menu-item item1 wow animate__fadeInDown">
-            <a href="#" class="menu-item-link" (click)="scrollInTo(selectElement); $event.preventDefault()">Пироженки</a></li>
-          <li class="menu-item item wow animate__fadeInDown"><a href="#" class="menu-item-link " (click)="scrollInTo(about); $event.preventDefault()">О нас</a></li>
-          <li class="menu-item item wow animate__fadeInDown"><a href="#" class="menu-item-link " (click)="scrollInTo(order); $event.preventDefault()">Оформить заказ</a></li>
+            <a href="#" class="menu-item-link"
+               (click)="scrollInTo(selectElement); $event.preventDefault()">Пироженки</a></li>
+          <li class="menu-item item wow animate__fadeInDown"><a href="#" class="menu-item-link "
+                                                                (click)="scrollInTo(about); $event.preventDefault()">О
+            нас</a></li>
+          <li class="menu-item item wow animate__fadeInDown"><a href="#" class="menu-item-link "
+                                                                (click)="scrollInTo(order); $event.preventDefault()">Оформить
+            заказ</a></li>
         </ul>
       </nav>
       <div class="burger" id="burger">
         <img src="assets/images/burger.png" alt="burger" (click)="burgerBehavior(menu)">
       </div>
-      <div class="phone" id="phone">{{phoneNumber | phoneNumberFormat}}</div>
+      <div class="phone" id="phone">{{ phoneNumber | phoneNumberFormat }}</div>
     </div>
   </header>
   <section class="title">
@@ -47,8 +52,8 @@
         <div class="title-info-text">Побалуйте себя и своих близких самыми вкусными и ароматными домашними
           пироженками Macaroon!
         </div>
-        <div class="button title-info-button" buttonEffect (click)="scrollInTo(selectElement); $event.preventDefault()"  >
-          <a href="#" class="button-link" >Выбрать макарун</a>
+        <div class="button title-info-button" buttonEffect (click)="scrollInTo(selectElement); $event.preventDefault()">
+          <a href="#" class="button-link">Выбрать макарун</a>
         </div>
       </div>
       <div class="title-image wow animate__backInRight">
@@ -78,40 +83,19 @@
         <img src="../assets/images/macaroon-big.png" alt="макарун" class="advantages-image-img">
       </div>
       <div class="advantages-info">
-        <advantages *ngFor="let advantage of advantages; let i = index" [advantage]="advantage" [index]="i"></advantages>
-<!--        <div class="advantage">-->
-<!--          <div class="advantage-image">-->
-<!--            <div class="advantage-icon wow animate__zoomIn">{{i+1}}</div>-->
-<!--          </div>-->
-<!--          <h3 class="advantage-title">{{advantage.advantageTitle}}</h3>-->
-<!--          <div class="advantage-text">{{advantage.advantageDescription}}-->
-<!--          </div>-->
-<!--        </div>-->
+        <advantages *ngFor="let advantage of advantages; let i = index" [advantage]="advantage"
+                    [index]="i"></advantages>
+
       </div>
     </div>
   </section>
   <section class="select" #selectElement>
     <div class="container">
-      <h2 class="select-title" >Выберите свой макарун</h2>
+      <h2 class="select-title">Выберите свой макарун</h2>
       <div class="select-info">
-        <product *ngFor="let product of products;" [product]="product"
-        (addToCartEvent)="addToCart($event, order)"></product>
 
-<!--        <div class="select-info-item  wow animate__slideInUp" *ngFor="let product of products; let i = index;">-->
-<!--          <div class="select-info-item-image wow animate__slideInDown">-->
-<!--            <img [src]="'assets/images/'+ product.image" alt="Макарун{{i+1}}" class="select-info-item-img">-->
-<!--          </div>-->
-<!--          <div class="select-info-item-title">{{ product.productTitle }}</div>-->
-<!--          <div class="select-info-item-container">-->
-<!--            <div class="select-info-item-text">-->
-<!--              <div class="select-info-item-result">{{ product.quantity }}</div>-->
-<!--              <div class="select-info-item-price">{{ product.price }}</div>-->
-<!--            </div>-->
-<!--            <div class="button select-info-item-button">-->
-<!--              <a href="#" class="select-info-item-link" (click)="addToCart(product, order); $event.preventDefault()">Заказать</a>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+        <product *ngFor="let product of products;" [product]="product"
+                 (addToCartEvent)="addToCart($event, order)"></product>
 
       </div>
     </div>
@@ -131,32 +115,8 @@
           <div class="order-info-text">Выберите понравившийся макарун, заполните форму и ожидайте звонка нашего
             пекаря!
           </div>
-          <div class="order-info-form-container">
-            <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" class="order-info-form needs-validation" novalidate *ngIf="showOrderForm">
-              <h3 class="order-info-small-title">Ваш выбор</h3>
-
-              <input type="text" formControlName="product" class="order-info-input form-control"
-                     placeholder="Напишите, что хотите заказать..." id="inputProduct" required>
-              <div *ngIf="orderForm.get('product')?.invalid && orderForm.get('product')?.touched" class="invalid-feedback">
-                Пожалуйста, укажите продукт.
-              </div>
-
-              <h3 class="order-info-small-title small-title2">Заполните данные для заказа</h3>
-
-              <input type="text" formControlName="name" class="order-info-input form-control"
-                     placeholder="Ваше имя" id="inputName" required>
-              <div *ngIf="orderForm.get('name')?.invalid && orderForm.get('name')?.touched" class="invalid-feedback">
-                Пожалуйста, введите имя.
-              </div>
-
-              <input type="text" formControlName="phone" class="order-info-input form-control"
-                     placeholder="+375 (__) ___ - __ - __" id="inputPhone" required>
-              <div *ngIf="orderForm.get('phone')?.invalid && orderForm.get('phone')?.touched" class="invalid-feedback">
-                Пожалуйста, введите телефон.
-              </div>
-
-              <button buttonEffect type="submit" class="button order-info-button" [disabled]="orderForm.invalid">Оформить заказ</button>
-            </form>
+          <div class="order-info-form-container" *ngIf="showOrderForm">
+            <app-form></app-form>
 
             <div class="order-success-info" *ngIf="!showOrderForm">
               {{ successMessage }}
@@ -183,24 +143,13 @@
       </div>
     </footer>
   </div>
+
   <div class="present" *ngIf="showPresent">
     <cart></cart>
-<!--    <a href="#" class="present-link">-->
-<!--      <div class="present-container">-->
-<!--        <img src="../assets/images/present.png" alt="present" class="present-image">-->
-<!--        <div class="order-present">-->
-<!--          <img src="../assets/images/present-order.png" alt="present-order" class="order-present-img">-->
-<!--          <span class="order-present-text">-->
-<!--            Оформите заказ<br> и получите подарок!-->
-<!--                </span>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </a>-->
-
   </div>
 </div>
 <div class="popup" *ngIf="isPopupOpen" (click)="popupClose()">
-  <span class="popup-info">{{messagePopup}}</span>
+  <span class="popup-info">{{ messagePopup }}</span>
 </div>
 <div class="loader-container" *ngIf="loading">
   <span class="loader"></span>

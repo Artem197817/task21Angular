@@ -3,6 +3,7 @@ import {ProductType} from '../../types/product.type';
 import {CurrencyPipe} from '../../pipes/currency.pipe';
 import {CartService} from '../../services/cart.service';
 import {ButtonEffectDirective} from '../../directives/button-effect.directive';
+import {OrderService} from '../../services/order.service';
 
 
 @Component({
@@ -16,20 +17,21 @@ import {ButtonEffectDirective} from '../../directives/button-effect.directive';
   styleUrl: './product.component.less'
 })
 export class ProductComponent {
-  i:number = 0;
+  i: number = 0;
 
-@Input() product!: ProductType;
+  @Input() product!: ProductType;
 
-@Output() addToCartEvent = new EventEmitter<ProductType>();
+  @Output() addToCartEvent = new EventEmitter<ProductType>();
 
-constructor(private cartService: CartService) {
+  constructor(private cartService: CartService,
+              private orderService: OrderService) {
+  }
 
-}
-
-addToCartProduct(){
-  this.addToCartEvent.emit(this.product);
-  this.cartService.cartAddProduct(this.product);
-}
+  addToCartProduct() {
+    this.addToCartEvent.emit(this.product);
+    this.cartService.cartAddProduct(this.product);
+    this.orderService.selectProduct(this.product);
+  }
 
 
 }

@@ -1,14 +1,13 @@
-
 <a href="#" class="present-link">
   <div class="present-container">
     <img src="assets/images/cart.png" alt="present" class="present-image">
     <div class="present-count">
-      <span class="count">{{cartService.count()}}</span>
+      <span class="count">{{ cartService.count() }}</span>
     </div>
     <div class="order-present">
       <img src="assets/images/present-order.png" alt="present-order" class="order-present-img">
       <span class="order-present-text">
-            {{cartService.summaView() | currencyPipe}}
+            {{ cartService.summaView() | currencyPipe }}
                 </span>
     </div>
   </div>

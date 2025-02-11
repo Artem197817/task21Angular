@@ -1,4 +1,4 @@
-import {Component, Injectable} from '@angular/core';
+import {Component} from '@angular/core';
 import {CurrencyPipe} from '../../pipes/currency.pipe';
 import {CartService} from '../../services/cart.service';
 
@@ -16,7 +16,7 @@ import {CartService} from '../../services/cart.service';
 
 export class CartComponent {
 
-constructor(public cartService: CartService) {
-}
+  constructor(public cartService: CartService) {
+  }
 
 }

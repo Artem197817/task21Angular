@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AdvantageType} from '../types/advantage.type';
 
 @Injectable({
@@ -6,9 +6,10 @@ import {AdvantageType} from '../types/advantage.type';
 })
 export class AdvantagesService {
 
-  constructor() { }
+  constructor() {
+  }
 
-  getAdvantages():AdvantageType[] {
+  getAdvantages(): AdvantageType[] {
     return [
       {
         advantageTitle: 'Лучшие продукты',

@@ -1,8 +1,6 @@
-import {Component} from '@angular/core';
-import {NgForOf, NgIf} from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {CommonModule, NgForOf, NgIf} from '@angular/common';
 import {ProductType} from './types/product.type';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {AdvantageType} from './types/advantage.type';
 import {ProductComponent} from './components/product/product.component';
 import {ProductService} from './services/product.service';
@@ -11,6 +9,7 @@ import {AdvantagesService} from './services/advantages.service';
 import {PhoneNumberFormatPipe} from './pipes/phone-number-format.pipe';
 import {CartComponent} from './components/cart/cart.component';
 import {ButtonEffectDirective} from './directives/button-effect.directive';
+import {FormComponent} from './components/form/form.component';
 
 
 @Component({
@@ -19,23 +18,20 @@ import {ButtonEffectDirective} from './directives/button-effect.directive';
   templateUrl: './app.component.html',
   imports: [
     NgForOf,
-    FormsModule,
-    ReactiveFormsModule,
     NgIf,
-    HttpClientModule,
     ProductComponent,
     AdvantagesComponent,
     PhoneNumberFormatPipe,
     CartComponent,
-    ButtonEffectDirective
-
+    ButtonEffectDirective,
+    FormComponent,
+    CommonModule,
   ],
   styleUrl: './app.component.less'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public title = 'task21Angular';
   public isDark: boolean = false;
-  public orderForm: FormGroup;
   public successMessage: string | null = null;
   public showPresent: boolean = false;
   public phoneNumber: string = '+375293689868';
@@ -44,25 +40,12 @@ export class AppComponent {
   public loading: boolean = false;
   public products: ProductType[] = [];
   public advantages: AdvantageType[] = [];
-  public messagePopup: string  = '';
+  public messagePopup: string = '';
   public isPopupOpen: boolean = false;
 
-  public FormModel = {
-    productTitle: '',
-    name: '',
-    phone: ''
-  }
 
-
-  constructor(private fb: FormBuilder,
-              private http: HttpClient,
-              private productService: ProductService,
-              private advantageService: AdvantagesService) {
-    this.orderForm = this.fb.group({
-      product: ['', Validators.required],
-      name: ['', Validators.required],
-      phone: ['', Validators.required]
-    });
+  constructor(private productService: ProductService,
+              private advantageService: AdvantagesService,) {
   }
 
   ngOnInit(): void {
@@ -89,14 +72,13 @@ export class AppComponent {
 
   public addToCart(product: ProductType, target: HTMLElement): void {
     this.scrollInTo(target);
-    this.orderForm.patchValue({
-      product: product.productTitle.toUpperCase()
-    });
+
     this.showPresent = true;
     this.isPopupOpen = true;
     this.messagePopup = product.productTitle + ' добавлен в корзину'
   }
-  popupClose(){
+
+  popupClose() {
     this.isPopupOpen = false;
   }
 
@@ -109,37 +91,39 @@ export class AppComponent {
     target.classList.remove('open');
   }
 
-  onSubmit() {
-    if (this.orderForm.valid) {
-      this.loading = true;
-      const formData = this.orderForm.value;
+  /** Пока к теме не относится **/
 
-      this.http.post('https://testologia.ru/checkout', formData).subscribe(
-        (response: any) => {
-          console.log(response);
-          if (response.success === 1) {
-            this.successInfo('Спасибо за Ваш заказ. Мы скоро свяжемся с Вами!');
-          } else {
-            this.successInfo('Возникла ошибка при оформлении заказа, позвоните нам и сделайте заказ');
-          }
-          this.loading = false;
-          this.orderForm.reset();
-        },
-        (error) => {
-          console.error('Произошла ошибка:', error);
-          this.successInfo('Произошла ошибка при отправке данных.');
-          this.loading = false;
-        }
-      );
-    }
-
-  }
-
-  public successInfo(message: string): void {
-    this.showOrderForm = false;
-    this.successMessage = message;
-    this.orderForm.reset();
-  }
+  // onSubmit() {
+  //   if (this.orderForm.valid) {
+  //     this.loading = true;
+  //     const formData = this.orderForm.value;
+  //
+  //     this.http.post('https://testologia.ru/checkout', formData).subscribe(
+  //       (response: any) => {
+  //         console.log(response);
+  //         if (response.success === 1) {
+  //           this.successInfo('Спасибо за Ваш заказ. Мы скоро свяжемся с Вами!');
+  //         } else {
+  //           this.successInfo('Возникла ошибка при оформлении заказа, позвоните нам и сделайте заказ');
+  //         }
+  //         this.loading = false;
+  //         this.orderForm.reset();
+  //       },
+  //       (error) => {
+  //         console.error('Произошла ошибка:', error);
+  //         this.successInfo('Произошла ошибка при отправке данных.');
+  //         this.loading = false;
+  //       }
+  //     );
+  //   }
+  //
+  // }
+  //
+  // public successInfo(message: string): void {
+  //   this.showOrderForm = false;
+  //   this.successMessage = message;
+  //   this.orderForm.reset();
+  // }
 
 
 }

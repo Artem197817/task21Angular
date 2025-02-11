@@ -14,8 +14,8 @@ import {TruncateTextPipe} from '../../pipes/truncate-text.pipe';
 export class AdvantagesComponent {
 
 
-  @Input() advantage:AdvantageType;
-  @Input() index:number = 0;
+  @Input() advantage: AdvantageType;
+  @Input() index: number = 0;
 
   constructor() {
     this.advantage = {
@@ -23,7 +23,6 @@ export class AdvantagesComponent {
       advantageDescription: '',
     }
   }
-
 
 
 }
