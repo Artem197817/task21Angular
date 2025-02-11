@@ -1,5 +1,4 @@
 import {Injectable, signal} from '@angular/core';
-import {CartComponent} from '../components/cart/cart.component';
 import {ProductType} from '../types/product.type';
 
 @Injectable({
