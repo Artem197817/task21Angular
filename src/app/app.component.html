@@ -27,13 +27,13 @@
         </div>
         <ul>
           <li class="menu-item item1 wow animate__fadeInDown">
-            <a href="#" class="menu-item-link"
+            <a routerLink="" fragment="select"  class="menu-item-link"
                (click)="scrollInTo(selectElement); $event.preventDefault()">Пироженки</a></li>
-          <li class="menu-item item wow animate__fadeInDown"><a href="#" class="menu-item-link "
+          <li class="menu-item item wow animate__fadeInDown"><a routerLink="" fragment="about" class="menu-item-link "
                                                                 (click)="scrollInTo(about); $event.preventDefault()">О
             нас</a></li>
-          <li class="menu-item item wow animate__fadeInDown"><a href="#" class="menu-item-link "
-                                                                (click)="scrollInTo(order); $event.preventDefault()">Оформить
+          <li class="menu-item item wow animate__fadeInDown"><a routerLink="" fragment="order"  class="menu-item-link "
+                                                                (click)="scrollInTo(order); ">Оформить
             заказ</a></li>
         </ul>
       </nav>
@@ -53,7 +53,7 @@
           пироженками Macaroon!
         </div>
         <div class="button title-info-button" buttonEffect (click)="scrollInTo(selectElement); $event.preventDefault()">
-          <a href="#" class="button-link">Выбрать макарун</a>
+          <a routerLink="" fragment="select"  class="button-link">Выбрать макарун</a>
         </div>
       </div>
       <div class="title-image wow animate__backInRight">
@@ -115,11 +115,12 @@
           <div class="order-info-text">Выберите понравившийся макарун, заполните форму и ожидайте звонка нашего
             пекаря!
           </div>
-          <div class="order-info-form-container" *ngIf="showOrderForm">
-            <app-form></app-form>
+          <div class="order-info-form-container" >
+            <app-form *ngIf="orderService.showOrderForm()"></app-form>
 
-            <div class="order-success-info" *ngIf="!showOrderForm">
-              {{ successMessage }}
+            <div class="order-success-info" *ngIf="!orderService.showOrderForm()"
+                  (click)="successBlockClose()">
+              {{ orderService.successMessage() }}
             </div>
           </div>
           <div class="order-image-motion small-berry">

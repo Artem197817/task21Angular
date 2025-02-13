@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal, WritableSignal} from '@angular/core';
 import {CommonModule, NgForOf, NgIf} from '@angular/common';
 import {ProductType} from './types/product.type';
 import {AdvantageType} from './types/advantage.type';
@@ -10,6 +10,8 @@ import {PhoneNumberFormatPipe} from './pipes/phone-number-format.pipe';
 import {CartComponent} from './components/cart/cart.component';
 import {ButtonEffectDirective} from './directives/button-effect.directive';
 import {FormComponent} from './components/form/form.component';
+import {RouterLink} from '@angular/router';
+import {OrderService} from './services/order.service';
 
 
 @Component({
@@ -26,26 +28,27 @@ import {FormComponent} from './components/form/form.component';
     ButtonEffectDirective,
     FormComponent,
     CommonModule,
+    RouterLink,
   ],
   styleUrl: './app.component.less'
 })
 export class AppComponent implements OnInit {
   public title = 'task21Angular';
-  public isDark: boolean = false;
-  public successMessage: string | null = null;
-  public showPresent: boolean = false;
-  public phoneNumber: string = '+375293689868';
-  public instagramLink: string = 'https://www.instagram.com';
-  public showOrderForm: boolean = true;
-  public loading: boolean = false;
-  public products: ProductType[] = [];
-  public advantages: AdvantageType[] = [];
-  public messagePopup: string = '';
-  public isPopupOpen: boolean = false;
+  private isDark: boolean = false;
+
+  protected showPresent:boolean = false;
+  protected phoneNumber: string = '+375293689868';
+  protected instagramLink: string = 'https://www.instagram.com';
+  protected loading: boolean = false;
+  protected products: ProductType[] = [];
+  protected advantages: AdvantageType[] = [];
+  protected messagePopup: string = '';
+  protected isPopupOpen: boolean = false;
 
 
   constructor(private productService: ProductService,
-              private advantageService: AdvantagesService,) {
+              private advantageService: AdvantagesService,
+              public orderService: OrderService,) {
   }
 
   ngOnInit(): void {
@@ -89,6 +92,9 @@ export class AppComponent implements OnInit {
 
   public closeMenu(target: HTMLElement): void {
     target.classList.remove('open');
+  }
+  successBlockClose(){
+    this.orderService.orderBehavior(true);
   }
 
   /** Пока к теме не относится **/

@@ -2,22 +2,22 @@
   <h3 class="order-info-small-title">Ваш выбор</h3>
 
   <input type="text" formControlName="product" class="order-info-input form-control"
-         placeholder="Напишите, что хотите заказать..." id="inputProduct" required>
-  <div *ngIf="orderForm.get('product')?.invalid && orderForm.get('product')?.touched" class="invalid-feedback">
+         placeholder="Напишите, что хотите заказать..." id="inputProduct">
+  <div *ngIf="product?.invalid && (orderForm.get('product')?.touched || product?.dirty) && product?.errors?.['required']" class="invalid-feedback">
     Пожалуйста, укажите продукт.
   </div>
 
   <h3 class="order-info-small-title small-title2">Заполните данные для заказа</h3>
 
   <input type="text" formControlName="name" class="order-info-input form-control"
-         placeholder="Ваше имя" id="inputName" required>
+         placeholder="Ваше имя" id="inputName" >
   <div *ngIf="orderForm.get('name')?.invalid && orderForm.get('name')?.touched" class="invalid-feedback">
     Пожалуйста, введите имя.
   </div>
 
   <input type="text" formControlName="phone" class="order-info-input form-control"
-         placeholder="+375 (__) ___ - __ - __" id="inputPhone" required>
-  <div *ngIf="orderForm.get('phone')?.invalid && orderForm.get('phone')?.touched" class="invalid-feedback">
+         placeholder="+375 (__) ___ - __ - __" id="inputPhone" >
+  <div *ngIf="phone?.invalid && (orderForm.get('phone')?.touched || phone?.dirty) && phone?.errors?.['required']" class="invalid-feedback">
     Пожалуйста, введите телефон.
   </div>
 

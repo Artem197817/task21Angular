@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {OrderService} from '../../services/order.service';
 import {ProductType} from '../../types/product.type';
@@ -21,13 +21,25 @@ export class FormComponent implements OnInit {
   orderForm: FormGroup;
   selectedProduct!: ProductType;
 
-  constructor(private fb: FormBuilder,
+//  @Input() orderBehavior!: (showOrderForm: boolean, successMessage:string ) => void;
+
+  constructor(public fb: FormBuilder,
               private orderService: OrderService) {
     this.orderForm = this.fb.group({
       product: ['', Validators.required],
       name: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      phone: ['', [Validators.required, Validators.pattern(/^\+?\d{10}$/)]],
     });
+  }
+
+  get product(){
+    return this.orderForm.get('product');
+  }
+  get name(){
+    return this.orderForm.get('name');
+  }
+  get phone(){
+    return this.orderForm.get('phone');
   }
 
   ngOnInit(): void {
@@ -42,6 +54,7 @@ export class FormComponent implements OnInit {
 
       console.log('Order form data:', this.orderForm.value);
 
+      this.orderService.orderBehavior(false, 'Заказ оформлен');
       this.orderForm.reset();
     }
   }
